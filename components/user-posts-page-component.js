@@ -1,35 +1,27 @@
+import { posts, getToken, goToPage, renderApp, setPosts } from "../index.js";
+import { getUserPosts } from "../api.js";
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
-import { posts, goToPage, setPosts, getToken, renderApp } from "../index.js";
-import { setLike, deleteLike, getPosts,  } from "../api.js";
+import { setLike, deleteLike } from "../api.js";
 
-export function renderPostsPageComponent({ appEl }) {
-  // TODO: реализовать рендер постов из api
-  // console.log("Актуальный список постов:", posts);
+export function renderUserPostsPageComponent({ appEl }) {
 
-  
-    const appPosts = posts.map((post) => {
-        return {
-            userImageUrl: post.user.imageUrl,
-            username: post.user.name,
-            userId: post.user.id,
-            imageUrl: post.imageUrl,
-            description: post.description,
-            userLogin: post.user.login,
-            date: formatDistanceToNow(new Date(post.createAt), { locale: ru }),
-            likes: post.likes,
-            isLiked: post.isLiked,
-            id: post.id,
-        }
-    })
-    
+const appPosts = posts.map((post) => {
+    return {
+        userImageUrl: post.user.imageUrl,
+        username: post.user.name,
+        userId: post.user.id,
+        imageUrl: post.imageUrl,
+        description: post.description,
+        userLogin: post.user.login,
+        date: formatDistanceToNow(new Date(post.createAt), { locale: ru }),
+        likes: post.likes,
+        isLiked: post.isLiked,
+        id: post.id,
+    }
+})
 
-  /**
-   * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
-   * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
-   */
-
-  const appHtml = appPosts.map((element, index) => {
+const postsHtml = appPosts.map((element, index) => {
     return `
     <div class="page-container">
                 <div class="header-container"></div>
@@ -60,13 +52,14 @@ export function renderPostsPageComponent({ appEl }) {
                     </p>
                   </li>
                 
+                   
                 </ul>
               </div>`
 
     
 });
 
-appEl.innerHTML = appHtml;
+appEl.innerHTML = postsHtml;
 
 renderHeaderComponent({
     element: document.querySelector(".header-container"),
@@ -93,12 +86,12 @@ const userId = postHeader.dataset.userId;
 likeButton.classList.add("shake-bottom");
 
 if (posts[index].isLiked) {
-    deleteLike( {token: getToken(), postId})
+    deleteLike({token: getToken(), postId})
     .then(() => {
         posts[index].isLiked = false;
     })
     .then(() => {
-        getPosts({ token: getToken(), userId})
+        getUserPosts({ token: getToken(), userId })
         .then((response) => {
             setPosts(response);
             likeButton.classList.delete("shake-bottom");
@@ -111,7 +104,7 @@ if (posts[index].isLiked) {
         posts[index].isLiked = true;
     })
     .then(() => {
-        getPosts({token: getToken(), userId})
+        getUserPosts({token: getToken(), userId})
         .then((response) => {
             setPosts(response);
             likeButton.classList.delete("shake-bottom");
@@ -125,5 +118,3 @@ if (posts[index].isLiked) {
 };
 likeEventListener();
 }
- 
-   
