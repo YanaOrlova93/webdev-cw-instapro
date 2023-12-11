@@ -13,7 +13,7 @@ const appPosts = posts.map((post) => {
         imageUrl: post.imageUrl,
         description: post.description,
         userLogin: post.user.login,
-        date: formatDistanceToNow(new Date(post.createAt), { locale: re }),
+        date: formatDistanceToNow(new Date(post.createAt), { locale: ru }),
         likes: post.likes,
         isLiked: post.isLiked,
         id: post.id,
@@ -75,7 +75,7 @@ for (let userEl of document.querySelectorAll(".post-header")) {
 const likeEventListener = () => {
     const likeButtons = document.querySelectorAll(".like-button");
 
-    likeButtons.forEach(lokeButton => {
+    likeButtons.forEach(likeButton => {
         likeButton.addEventListener("click", (event) => {
 event.stopPropagation();
 const postId = likeButton.dataset.postId;
