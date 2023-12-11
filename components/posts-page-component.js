@@ -1,7 +1,7 @@
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
-import { posts, goToPage, setPosts } from "../index.js";
-import { setLike, deleteLike, getPosts } from "../api.js";
+import { posts, goToPage, setPosts, getToken, renderApp } from "../index.js";
+import { setLike, deleteLike, getPosts,  } from "../api.js";
 
 export function renderPostsPageComponent({ appEl }) {
   // TODO: реализовать рендер постов из api
@@ -111,7 +111,7 @@ if (posts[index].isLiked) {
         posts[index].isLiked = true;
     })
     .then(() => {
-        getUserPosts({token: getToken(), userId})
+        getPosts({token: getToken(), userId})
         .then((response) => {
             setPosts(response);
             likeButton.classList.delete("shake-bottom");

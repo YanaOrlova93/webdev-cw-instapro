@@ -1,8 +1,8 @@
 import { posts, getToken, goToPage, renderApp, setPosts } from "../index.js";
-import { getUserPosts } from "../api";
-import { USER_POSTS_PAGE } from "../routes";
-import { renderHeaderComponent } from "./header-component";
-import { setLike, deleteLike, getUserPosts} from "../api.js";
+import { getUserPosts } from "../api.js";
+import { USER_POSTS_PAGE } from "../routes.js";
+import { renderHeaderComponent } from "./header-component.js";
+import { setLike, deleteLike, getUserPosts } from "../api.js";
 
 export function renderUserPostsPageComponent({ appEl }) {
 const appPosts = posts.map((post) => {
@@ -85,12 +85,12 @@ const userId = postHeader.dataset.userId;
 likeButton.classList.add("shake-bottom");
 
 if (posts[index].isLiked) {
-    deleteLike( {token: getToken(), postId})
+    deleteLike({token: getToken(), postId})
     .then(() => {
         posts[index].isLiked = false;
     })
     .then(() => {
-        getUserPosts({ token: getToken(), userId})
+        getUserPosts({ token: getToken(), userId })
         .then((response) => {
             setPosts(response);
             likeButton.classList.delete("shake-bottom");
