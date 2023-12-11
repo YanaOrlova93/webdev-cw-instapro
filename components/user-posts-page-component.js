@@ -19,6 +19,7 @@ const appPosts = posts.map((post) => {
         isLiked: post.isLiked,
         id: post.id,
     }
+    
 })
 
 const postsHtml = appPosts.map((element, index) => {
