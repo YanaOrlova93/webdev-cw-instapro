@@ -2,9 +2,10 @@ import { posts, getToken, goToPage, renderApp, setPosts } from "../index.js";
 import { getUserPosts } from "../api.js";
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
-import { setLike, deleteLike, getUserPosts } from "../api.js";
+import { setLike, deleteLike } from "../api.js";
 
 export function renderUserPostsPageComponent({ appEl }) {
+
 const appPosts = posts.map((post) => {
     return {
         userImageUrl: post.user.imageUrl,
