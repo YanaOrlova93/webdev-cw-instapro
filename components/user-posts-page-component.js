@@ -1,8 +1,8 @@
 import { posts, getToken, goToPage, renderApp, setPosts } from "../index.js";
-import { getUserPosts } from "../api.js";
+
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
-import { setLike, deleteLike } from "../api.js";
+import { setLike, deleteLike, getUserPosts } from "../api.js";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from "date-fns/locale";
 

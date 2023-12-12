@@ -1,4 +1,4 @@
-import { addPost, getPosts, getUserPosts } from "./api.js";
+import { getPosts, getUserPosts, addPost } from "./api.js";
 import { renderAddPostPageComponent } from "./components/add-post-page-component.js";
 import { renderAuthPageComponent } from "./components/auth-page-component.js";
 import {
@@ -9,7 +9,7 @@ import {
   USER_POSTS_PAGE,
 } from "./routes.js";
 import { renderPostsPageComponent } from "./components/posts-page-component.js";
-import { renderUserPostsPageComponent} from "./components/user-posts-page-component.js"
+import { renderUserPostsPageComponent} from "./components/user-posts-page-component.js";
 import { renderLoadingPageComponent } from "./components/loading-page-component.js";
 import {
   getUserFromLocalStorage,
