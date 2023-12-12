@@ -1,10 +1,11 @@
-import { posts, getToken, goToPage, renderApp, setPosts } from "../index.js";
-
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
-import { setLike, deleteLike, getUserPosts } from "../api.js";
+import { posts, goToPage, getToken, renderApp, setPosts } from "../index.js";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from "date-fns/locale";
+import { setLike, deleteLike, getUserPosts } from "../api.js";
+
+
 
 export function renderUserPostsPageComponent({ appEl }) {
 
@@ -16,7 +17,7 @@ const appPosts = posts.map((post) => {
         imageUrl: post.imageUrl,
         description: post.description,
         userLogin: post.user.login,
-        date: formatDistanceToNow(new Date(post.createAt), { locale: ru }),
+        date: formatDistanceToNow(new Date(post.createdAt), { locale: ru }),
         likes: post.likes,
         isLiked: post.isLiked,
         id: post.id,
@@ -33,7 +34,7 @@ const postsHtml = appPosts.map((element, index) => {
                   
                     <div class="post-header" data-user-id="${element.userId}">
                         <img src="${element.userImageUrl}" class="post-header__user-image">
-                        <p class="post-header__user-name">${element.userName}</p>
+                        <p class="posts-user-header__user-name">${element.userName}</p>
                     </div>
                     <div class="post-image-container">
                       <img class="post-image" src="${element.imageUrl}">
@@ -43,7 +44,7 @@ const postsHtml = appPosts.map((element, index) => {
                         <img src="${element.isLiked ? `./assets/images/like-active.svg` : `./assets/images/like-not-active.svg`}">
                       </button>
                       <p class="post-likes-text">
-                        Нравится: <strong>${element.likes.lenght >=1 ? element.likes[0].name : '0'}</strong> ${(element.likes.lenght-1) > 0 ? 'и еще' + ' ' + (element.likes.length - 1) : ''}
+                        Нравится: <strong>${element.likes.lenght >= 1 ? element.likes[0].name : '0'}</strong> ${(element.likes.lenght-1) > 0 ? 'и еще' + ' ' + (element.likes.length - 1) : ''}
                       </p>
                     </div>
                     <p class="post-text">

@@ -44,7 +44,7 @@ export function getUserPosts({ token, userId }) {
   }
 
 
-  export const addPost = ({ token,description, imageUrl }) => {
+  export const addPost = ({ token, description, imageUrl }) => {
     return fetch(postsHost, {
         method: "POST",
         body: JSON.stringify({
