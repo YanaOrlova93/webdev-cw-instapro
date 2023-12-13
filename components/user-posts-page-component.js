@@ -3,7 +3,7 @@ import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, getToken, renderApp, setPosts } from "../index.js";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from "date-fns/locale";
-import { setLike, deleteLike, getUserPosts } from "../api.js";
+import { setLike, removeLike, getUserPosts } from "../api.js";
 
 
 
@@ -90,7 +90,7 @@ const userId = postHeader.dataset.userId;
 likeButton.classList.add("shake-bottom");
 
 if (posts[index].isLiked) {
-    deleteLike({token: getToken(), postId})
+    removeLike({token: getToken(), postId})
     .then(() => {
         posts[index].isLiked = false;
     })
@@ -98,7 +98,7 @@ if (posts[index].isLiked) {
         getUserPosts({ token: getToken(), userId })
         .then((response) => {
             setPosts(response);
-            likeButton.classList.delete("shake-bottom");
+            likeButton.classList.remove("shake-bottom");
             renderApp();
                 })
     })
@@ -111,7 +111,7 @@ if (posts[index].isLiked) {
         getUserPosts({token: getToken(), userId})
         .then((response) => {
             setPosts(response);
-            likeButton.classList.delete("shake-bottom");
+            likeButton.classList.remove("shake-bottom");
             renderApp();
         })
     })

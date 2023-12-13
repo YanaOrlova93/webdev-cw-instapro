@@ -84,7 +84,7 @@ export function getUserPosts({ token, userId }) {
       }
 
 
-      export const deleteLike = ({ token, postId }) => {
+      export const removeLike = ({ token, postId }) => {
         return fetch(postsHost + '/' + postId + "/dislike", {
             method: "POST",
             headers: {
