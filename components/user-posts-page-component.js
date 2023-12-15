@@ -12,7 +12,7 @@ export function renderUserPostsPageComponent({ appEl }) {
 const appPosts = posts.map((post) => {
     return {
         userImageUrl: post.user.imageUrl,
-        username: post.user.name,
+        userName: post.user.name,
         userId: post.user.id,
         imageUrl: post.imageUrl,
         description: post.description,

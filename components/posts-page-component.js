@@ -13,7 +13,7 @@ export function renderPostsPageComponent({ appEl }) {
     const appPosts = posts.map((post) => {
         return {
             userImageUrl: post.user.imageUrl,
-            username: post.user.name,
+            userName: post.user.name,
             userId: post.user.id,
             imageUrl: post.imageUrl,
             description:  post.description,
@@ -40,7 +40,7 @@ export function renderPostsPageComponent({ appEl }) {
                   
                     <div class="post-header" data-user-id="${element.userId}">
                         <img src="${element.userImageUrl}" class="post-header__user-image">
-                        <p class="post-header__user-name">${element.username}</p>
+                        <p class="post-header__user-name">${element.userName}</p>
                     </div>
                     <div class="post-image-container">
                       <img class="post-image" src="${element.imageUrl}">
@@ -54,7 +54,7 @@ export function renderPostsPageComponent({ appEl }) {
                       </p>
                     </div>
                     <p class="post-text">
-                      <span class="user-name">${element.username}</span>
+                      <span class="user-name">${element.userName}</span>
                       ${element.description}
                     </p>
                     <p class="post-date">
