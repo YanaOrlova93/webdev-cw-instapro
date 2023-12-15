@@ -4,7 +4,7 @@ import { posts, goToPage, setPosts, getToken, renderApp } from "../index.js";
 import { setLike, removeLike, getPosts,  } from "../api.js";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from "date-fns/locale";
-import { removeAllTags } from "../helpers.js";
+import { removeHtmlTags } from "../helpers.js";
 
 export function renderPostsPageComponent({ appEl }) {
   // TODO: реализовать рендер постов из api
@@ -17,7 +17,7 @@ export function renderPostsPageComponent({ appEl }) {
             username: post.user.name,
             userId: post.user.id,
             imageUrl: post.imageUrl,
-            description:  removeAllTags(post.description),
+            description:  removeHtmlTags(post.description),
             userLogin: post.user.login,
             date: formatDistanceToNow(new Date(post.createdAt), { locale: ru }),
             likes: post.likes,
@@ -56,7 +56,7 @@ export function renderPostsPageComponent({ appEl }) {
                     </div>
                     <p class="post-text">
                       <span class="user-name">${element.username}</span>
-                      ${removeAllTags(element.description)}
+                      ${element.description}
                     </p>
                     <p class="post-date">
                       ${element.date} назад
