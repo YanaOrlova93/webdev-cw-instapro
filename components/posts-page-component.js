@@ -4,10 +4,11 @@ import { posts, goToPage, setPosts, getToken, renderApp } from "../index.js";
 import { setLike, removeLike, getPosts,  } from "../api.js";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from "date-fns/locale";
+import { removeAllTags } from "../helpers.js";
 
 export function renderPostsPageComponent({ appEl }) {
   // TODO: реализовать рендер постов из api
-  // console.log("Актуальный список постов:", posts);
+  console.log("Актуальный список постов:", posts);
 
   
     const appPosts = posts.map((post) => {
@@ -16,9 +17,9 @@ export function renderPostsPageComponent({ appEl }) {
             username: post.user.name,
             userId: post.user.id,
             imageUrl: post.imageUrl,
-            description: post.description,
+            description:  removeAllTags(post.description),
             userLogin: post.user.login,
-            date: formatDistanceToNow(new Date(post.createAt), { locale: ru }),
+            date: formatDistanceToNow(new Date(post.createdAt), { locale: ru }),
             likes: post.likes,
             isLiked: post.isLiked,
             id: post.id,
@@ -40,7 +41,7 @@ export function renderPostsPageComponent({ appEl }) {
                   
                     <div class="post-header" data-user-id="${element.userId}">
                         <img src="${element.userImageUrl}" class="post-header__user-image">
-                        <p class="post-header__user-name">${element.userName}</p>
+                        <p class="post-header__user-name">${element.username}</p>
                     </div>
                     <div class="post-image-container">
                       <img class="post-image" src="${element.imageUrl}">
@@ -50,12 +51,12 @@ export function renderPostsPageComponent({ appEl }) {
                         <img src="${element.isLiked ? `./assets/images/like-active.svg` : `./assets/images/like-not-active.svg`}">
                       </button>
                       <p class="post-likes-text">
-                        Нравится: <strong>${element.likes.lenght >=1 ? element.likes[0].name : '0'}</strong> ${(element.likes.lenght-1) > 0 ? 'и еще' + ' ' + (element.likes.length - 1) : ''}
+                        Нравится: <strong>${element.likes.length >=1 ? element.likes[0].name : '0'}</strong> ${(element.likes.length-1) > 0 ? 'и еще' + ' ' + (element.likes.length - 1) : ''}
                       </p>
                     </div>
                     <p class="post-text">
-                      <span class="user-name">${element.userName}</span>
-                      ${element.description}
+                      <span class="user-name">${element.username}</span>
+                      ${removeAllTags(element.description)}
                     </p>
                     <p class="post-date">
                       ${element.date} назад
@@ -85,15 +86,15 @@ for (let userEl of document.querySelectorAll(".post-header")) {
 const likeEventListener = () => {
     const likeButtons = document.querySelectorAll(".like-button");
 
-    likeButtons.forEach(likeButton => {
+    likeButtons.forEach( (likeButton, index) => {
         likeButton.addEventListener("click", (event) => {
-event.stopPropagation();
-const postId = likeButton.dataset.postId;
-const index = likeButton.dataset.index;
-const postHeader = document.querySelector('.post-header');
-const userId = postHeader.dataset.userId;
-likeButton.classList.add("shake-bottom");
-
+          event.stopPropagation();
+          const postId = likeButton.dataset.postId;
+          // const index = likeButton.dataset.index;
+          const postHeader = document.querySelector('.post-header');
+          const userId = postHeader.dataset.userId;
+          likeButton.classList.add("shake-bottom");
+console.log(posts[index].isLiked);
 if (posts[index].isLiked) {
     removeLike( {token: getToken(), postId})
     .then(() => {
