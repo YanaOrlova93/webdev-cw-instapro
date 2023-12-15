@@ -4,6 +4,7 @@ import { posts, goToPage, getToken, renderApp, setPosts } from "../index.js";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from "date-fns/locale";
 import { setLike, removeLike, getUserPosts } from "../api.js";
+import { removeAllTags } from "../helpers.js";
 
 
 
@@ -49,7 +50,7 @@ const postsHtml = appPosts.map((element, index) => {
                     </div>
                     <p class="post-text">
                       <span class="user-name">${element.userName}</span>
-                      ${element.description}
+                      ${removeAllTags(element.description)}
                     </p>
                     <p class="post-date">
                       ${element.date} назад

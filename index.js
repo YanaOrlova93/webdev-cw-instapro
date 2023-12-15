@@ -127,10 +127,11 @@ export const renderApp = () => {
         })
         .then((responseData) => {
           console.log(responseData);
+          goToPage(POSTS_PAGE);
         });
 
         // console.log("Добавляю пост...", { description, imageUrl });
-        goToPage(POSTS_PAGE);
+        
       },
     });
   }
