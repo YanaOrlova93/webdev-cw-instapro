@@ -4,6 +4,7 @@ import { posts, goToPage, setPosts, getToken, renderApp } from "../index.js";
 import { setLike, removeLike, getPosts,  } from "../api.js";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from "date-fns/locale";
+import { removeAllTags } from "../helpers.js";
 
 export function renderPostsPageComponent({ appEl }) {
   // TODO: реализовать рендер постов из api
@@ -55,7 +56,7 @@ export function renderPostsPageComponent({ appEl }) {
                     </div>
                     <p class="post-text">
                       <span class="user-name">${element.userName}</span>
-                      ${element.description}
+                      ${removeAllTags(element.description)}
                     </p>
                     <p class="post-date">
                       ${element.date} назад
