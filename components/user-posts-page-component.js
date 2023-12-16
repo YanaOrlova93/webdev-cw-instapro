@@ -34,7 +34,7 @@ const postsHtml = appPosts.map((element, index) => {
                   <li class="post" data-index=${index}>
                   
                     <div class="post-header" data-user-id="${element.userId}">
-                        <img src="${element.userImageUrl}" class="post-header__user-image">
+                        <img src="${element.userImageUrl}" class="posts-header__user-image">
                         <p class="posts-user-header__user-name">${element.userName}</p>
                     </div>
                     <div class="post-image-container">

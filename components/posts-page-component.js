@@ -90,18 +90,20 @@ const likeEventListener = () => {
         likeButton.addEventListener("click", (event) => {
           event.stopPropagation();
           const postId = likeButton.dataset.postId;
-          // const index = likeButton.dataset.index;
+          const index = likeButton.dataset.index;
           const postHeader = document.querySelector('.post-header');
           const userId = postHeader.dataset.userId;
           likeButton.classList.add("shake-bottom");
+
 console.log(posts[index].isLiked);
+
 if (posts[index].isLiked) {
-    removeLike( {token: getToken(), postId})
+    removeLike({ token: getToken(), postId})
     .then(() => {
         posts[index].isLiked = false;
     })
     .then(() => {
-        getPosts({ token: getToken(), userId})
+        getPosts({ token: getToken() })
         .then((response) => {
             setPosts(response);
             likeButton.classList.remove("shake-bottom");
