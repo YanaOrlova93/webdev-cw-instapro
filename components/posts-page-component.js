@@ -37,7 +37,7 @@ export function renderPostsPageComponent({ appEl }) {
     <div class="page-container">
                 <div class="header-container"></div>
                 <ul class="posts">
-                  <li class="post" data-index=${index}>
+                  <li class="post" data-index="${index}">
                   
                     <div class="post-header" data-user-id="${element.userId}">
                         <img src="${element.userImageUrl}" class="post-header__user-image">
@@ -47,7 +47,7 @@ export function renderPostsPageComponent({ appEl }) {
                       <img class="post-image" src="${element.imageUrl}">
                     </div>
                     <div class="post-likes">
-                      <button data-post-id="${element.id}" data-like="${element.isLiked ? 'true' : ''}" data-index=$"{index}" class="like-button">
+                      <button data-post-id="${element.id}" data-like="${element.isLiked ? 'true' : ''}" data-index="${index}" class="like-button">
                         <img src="${element.isLiked ? `./assets/images/like-active.svg` : `./assets/images/like-not-active.svg`}">
                       </button>
                       <p class="post-likes-text">
@@ -91,8 +91,8 @@ const likeEventListener = () => {
           event.stopPropagation();
           const postId = likeButton.dataset.postId;
           const index = likeButton.dataset.index;
-          const postHeader = document.querySelector('.post-header');
-          const userId = postHeader.dataset.userId;
+          // const postHeader = document.querySelector('.post-header');
+          // const userId = postHeader.dataset.userId;
           likeButton.classList.add("shake-bottom");
 
 console.log(posts[index].isLiked);
@@ -116,7 +116,7 @@ if (posts[index].isLiked) {
         posts[index].isLiked = true;
     })
     .then(() => {
-        getPosts({token: getToken(), userId})
+        getPosts({token: getToken() })
         .then((response) => {
             setPosts(response);
             likeButton.classList.remove("shake-bottom");
